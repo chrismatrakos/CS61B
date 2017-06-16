@@ -61,7 +61,7 @@ public class Homework6Test {
 		}
 		HashTableChained table = new HashTableChained(numBoards);
 		initTable(table, numBoards);
-		System.out.println("Start:");
+		System.out.println("Start of the project:");
 
 		// To test your hash function, add a method to your HashTableChained
 		// class
