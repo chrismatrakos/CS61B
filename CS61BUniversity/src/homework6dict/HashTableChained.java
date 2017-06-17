@@ -25,7 +25,7 @@ public class HashTableChained implements Dictionary {
 	private List[] arrayBucket;
 	private long scale;
 	private long shift;
-	private long prime = 109345121;
+	private int prime = 109345121;
 
 	/**
 	 * Construct a new empty hash table intended to hold roughly sizeEstimate
@@ -39,8 +39,8 @@ public class HashTableChained implements Dictionary {
 		this.N = sieve(loadFactor);
 		arrayBucket = new List[N];
 		java.util.Random rand = new java.util.Random();
-		scale = rand.nextInt((N - 1) + 1);
-		shift = rand.nextInt(N);
+		scale = rand.nextInt((prime - 1) + 1);
+		shift = rand.nextInt(prime);
 	}
 
 	/**
@@ -54,8 +54,8 @@ public class HashTableChained implements Dictionary {
 		N = 107;
 		arrayBucket = new List[N];
 		java.util.Random rand = new java.util.Random();
-		scale = rand.nextInt((N - 1) + 1);
-		shift = rand.nextInt(N);
+		scale = rand.nextInt((prime - 1) + 1);
+		shift = rand.nextInt(prime);
 	}
 
 	/**
