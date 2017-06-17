@@ -35,7 +35,12 @@ public class HashTableChained implements Dictionary {
 
 	public HashTableChained(int sizeEstimate) {
 		// Your solution here.
-
+		int loadFactor = (int) (sizeEstimate / 0.75);
+		this.N = sieve(loadFactor);
+		arrayBucket = new List[N];
+		java.util.Random rand = new java.util.Random();
+		scale = rand.nextInt((N - 1) + 1);
+		shift = rand.nextInt(N);
 	}
 
 	/**
