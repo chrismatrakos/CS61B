@@ -160,8 +160,29 @@ public class HashTableChained implements Dictionary {
 		// Your solution here.
 	}
 
-	private int eratosthenisSieve(int capacity) {
-		return 0;
+	private int sieve(int capacity) {
+		boolean b[] = new boolean[capacity];
+		for (int i = 0; i < b.length; i++) {
+			b[i] = true;
+		}
+		for (int i = 2; i * i <= capacity; i++) {
+			if (b[i] == true) {
+				for (int j = i * i; j < capacity; j += i) {
+					b[j] = false;
+				}
+			}
+		}
+		//
+		// for (int i = 2; i < b.length; i++) {
+		// if (b[i]) {
+		// System.out.println(i);
+		// }
+		// }
+		int lastPrime = b.length - 1;
+		while (!b[lastPrime]) {
+			lastPrime--;
+		}
+		return lastPrime;
 	}
 
 }
