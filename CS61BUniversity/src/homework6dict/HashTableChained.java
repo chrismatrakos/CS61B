@@ -68,7 +68,8 @@ public class HashTableChained implements Dictionary {
 
 	int compFunction(int code) {
 		// Replace the following line with your solution.
-		return 88;
+		return (int) (((scale * code + shift) % prime) % N);
+
 	}
 
 	/**
