@@ -164,6 +164,9 @@ public class HashTableChained implements Dictionary {
 	@Override
 	public void makeEmpty() {
 		// Your solution here.
+		for (int i = 0; i < this.size(); i++) {
+			arrayBucket[i] = null;
+		}
 	}
 
 	private int sieve(int capacity) {
