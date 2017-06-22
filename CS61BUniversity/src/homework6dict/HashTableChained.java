@@ -152,13 +152,13 @@ public class HashTableChained implements Dictionary {
 	public Entry find(Object key) {
 		// Replace the following line with your solution.
 		int keyIndex = compFunction(key.hashCode());
-		List s = arrayBucket[keyIndex];
+		slist = arrayBucket[keyIndex];
 
-		if (s.isEmpty()) {
+		if (slist.isEmpty()) {
 			return null;
 		} else {
 			try {
-				ListNode node = s.front();
+				ListNode node = slist.front();
 				if (((Entry) node.item()).key().equals(key)) {
 					return (Entry) node.item();
 				} else {
