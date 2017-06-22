@@ -1,7 +1,9 @@
 package homework6dict;
 
+import list.InvalidNodeException;
 /* HashTableChained.java */
 import list.List;
+import list.ListNode;
 
 /**
  * HashTableChained implements a Dictionary as a hash table with chaining. All
@@ -116,7 +118,20 @@ public class HashTableChained implements Dictionary {
 	@Override
 	public Entry insert(Object key, Object value) {
 		// Replace the following line with your solution.
-		return null;
+		Entry e = new Entry();
+		e.key = key;
+		e.value = value;
+		int bucketIndex = compFunction(key.hashCode());
+		//
+		// // check for the size if its full and double size and rehash
+		// // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// if (arrayBucket[bucketIndex] == null) {
+		// arrayBucket[bucketIndex] = new SList();
+		// arrayBucket[bucketIndex].insertBack(e);
+		// } else {
+		// arrayBucket[bucketIndex].insertBack(e);
+		// }
+		return e;
 	}
 
 	/**
@@ -130,11 +145,34 @@ public class HashTableChained implements Dictionary {
 	 *            the search key.
 	 * @return an entry containing the key and an associated value, or null if
 	 *         no entry contains the specified key.
+	 * @throws InvalidNodeException
 	 **/
 
 	@Override
 	public Entry find(Object key) {
 		// Replace the following line with your solution.
+		int keyIndex = compFunction(key.hashCode());
+		List s = arrayBucket[keyIndex];
+
+		if (s.isEmpty()) {
+			return null;
+		} else {
+			try {
+				ListNode node = s.front();
+				if (((Entry) node.item()).key().equals(key)) {
+					return (Entry) node.item();
+				} else {
+					while (node.next() != null) {
+						node = node.next();
+						if (((Entry) node.item()).key().equals(key)) {
+							return (Entry) node.item();
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
