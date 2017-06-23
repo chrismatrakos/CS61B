@@ -70,7 +70,7 @@ public class HashTableChained implements Dictionary {
 
 	int compFunction(int code) {
 		// Replace the following line with your solution.
-		return (int) (((scale * code + shift) % prime) % N);
+		return (int) Math.abs((((scale * code + shift) % prime) % N));
 
 	}
 
