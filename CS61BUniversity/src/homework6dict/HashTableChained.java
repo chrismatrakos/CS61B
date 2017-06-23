@@ -118,6 +118,10 @@ public class HashTableChained implements Dictionary {
 	@Override
 	public Entry insert(Object key, Object value) {
 		// Replace the following line with your solution.
+		if (key == null || value == null) {
+			System.out.println("Invalid key/value");
+			return null;
+		}
 		Entry e = new Entry();
 		e.key = key;
 		e.value = value;
@@ -131,6 +135,7 @@ public class HashTableChained implements Dictionary {
 		// } else {
 		// arrayBucket[bucketIndex].insertBack(e);
 		// }
+		this.size++;
 		return e;
 	}
 
@@ -151,6 +156,10 @@ public class HashTableChained implements Dictionary {
 	@Override
 	public Entry find(Object key) {
 		// Replace the following line with your solution.
+		if (key == null) {
+			System.out.println("Invalid key");
+			return null;
+		}
 		int keyIndex = compFunction(key.hashCode());
 		slist = arrayBucket[keyIndex];
 
@@ -193,6 +202,12 @@ public class HashTableChained implements Dictionary {
 	@Override
 	public Entry remove(Object key) {
 		// Replace the following line with your solution.
+		if (key == null) {
+			System.out.println("Invalid key");
+			return null;
+		}
+
+		this.size--;
 		return null;
 	}
 
