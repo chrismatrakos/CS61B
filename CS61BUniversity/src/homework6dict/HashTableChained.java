@@ -332,4 +332,24 @@ public class HashTableChained implements Dictionary {
 		return lastPrime;
 	}
 
+	public void printCollisions() {
+		String str = "Collisions:\n";
+		for (int i = 0; i < arrayBucket.length; i++) {
+			if (arrayBucket[i] == null) {
+				str += i + " : 0\n";
+			} else {
+				str += i + " : " + arrayBucket[i].length() + "\n";
+			}
+		}
+		System.out.println(str);
+	}
+
+	@Override
+	public String toString() {
+		String strMap = "";
+		for (List s : arrayBucket) {
+			strMap += "[" + s.toString() + "]\n";
+		}
+		return strMap;
+	}
 }
