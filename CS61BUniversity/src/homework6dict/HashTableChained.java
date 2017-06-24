@@ -222,6 +222,10 @@ public class HashTableChained implements Dictionary {
 		}
 	}
 
+	private void rehash() {
+
+	}
+
 	private int sieve(int capacity) {
 		boolean b[] = new boolean[capacity];
 		for (int i = 0; i < b.length; i++) {
