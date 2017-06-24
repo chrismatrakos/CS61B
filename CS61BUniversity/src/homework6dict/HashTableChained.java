@@ -4,6 +4,7 @@ import list.InvalidNodeException;
 /* HashTableChained.java */
 import list.List;
 import list.ListNode;
+import list.SList;
 
 /**
  * HashTableChained implements a Dictionary as a hash table with chaining. All
@@ -122,19 +123,28 @@ public class HashTableChained implements Dictionary {
 			System.out.println("Invalid key/value");
 			return null;
 		}
+		if (this.size == N) {
+			java.util.Random rand = new java.util.Random();
+			scale = rand.nextInt((prime - 1) + 1);
+			shift = rand.nextInt(prime);
+			N = N * 2;
+			try {
+				rehash();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		Entry e = new Entry();
 		e.key = key;
 		e.value = value;
 		int bucketIndex = compFunction(key.hashCode());
-		//
-		// // check for the size if its full and double size and rehash
-		// // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		// if (arrayBucket[bucketIndex] == null) {
-		// arrayBucket[bucketIndex] = new SList();
-		// arrayBucket[bucketIndex].insertBack(e);
-		// } else {
-		// arrayBucket[bucketIndex].insertBack(e);
-		// }
+
+		if (arrayBucket[bucketIndex] == null) {
+			arrayBucket[bucketIndex] = new SList();
+			arrayBucket[bucketIndex].insertBack(e);
+		} else {
+			arrayBucket[bucketIndex].insertBack(e);
+		}
 		this.size++;
 		return e;
 	}
@@ -161,12 +171,12 @@ public class HashTableChained implements Dictionary {
 			return null;
 		}
 		int keyIndex = compFunction(key.hashCode());
-		slist = arrayBucket[keyIndex];
 
-		if (slist.isEmpty()) {
+		if (arrayBucket[keyIndex] == null) {
 			return null;
 		} else {
 			try {
+				slist = arrayBucket[keyIndex];
 				ListNode node = slist.front();
 				if (((Entry) node.item()).key().equals(key)) {
 					return (Entry) node.item();
@@ -206,9 +216,49 @@ public class HashTableChained implements Dictionary {
 			System.out.println("Invalid key");
 			return null;
 		}
+		if (this.size <= N / 4) {
+			java.util.Random rand = new java.util.Random();
+			scale = rand.nextInt((prime - 1) + 1);
+			shift = rand.nextInt(prime);
+			N = N / 2;
+			try {
+				rehash();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
-		this.size--;
+		int keyIndex = compFunction(key.hashCode());
+		if (arrayBucket[keyIndex] == null) {
+			return null;
+		} else {
+			try {
+				slist = arrayBucket[keyIndex];
+				ListNode node = slist.front();
+				if (((Entry) node.item()).key().equals(key)) {
+					Entry e = (Entry) node.item();
+					node.remove();
+					this.size--;
+					return e;
+
+				} else {
+					while (node.next() != null) {
+						node = node.next();
+						if (((Entry) node.item()).key().equals(key)) {
+							Entry e = (Entry) node.item();
+							node.remove();
+							this.size--;
+							return e;
+						}
+					}
+				}
+			} catch (Exception e) {
+			}
+
+		}
+		System.out.println("Should never reach here!!!");
 		return null;
+
 	}
 
 	/**
@@ -222,8 +272,32 @@ public class HashTableChained implements Dictionary {
 		}
 	}
 
-	private void rehash() {
+	private void rehash() throws InvalidNodeException {
+		// new bucket
+		List[] newArrayBucket = new List[N];
 
+		for (int i = 0; i < arrayBucket.length; i++) {
+			if (arrayBucket[i] == null) {
+				continue;
+			} else {
+				while (!arrayBucket[i].isEmpty()) {
+					ListNode node = arrayBucket[i].front();
+					Entry entry = (Entry) node.item();
+					node.remove();
+
+					// rehashing the key with new N scale shift
+					int index = compFunction(entry.key.hashCode());
+					if (newArrayBucket[index] == null) {
+						newArrayBucket[index] = new SList();
+						newArrayBucket[index].insertFront(entry);
+					} else {
+						newArrayBucket[index].insertFront(entry);
+					}
+				}
+			}
+		}
+		arrayBucket = newArrayBucket;
+		newArrayBucket = null;
 	}
 
 	private int sieve(int capacity) {
