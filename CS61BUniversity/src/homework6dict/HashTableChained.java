@@ -173,17 +173,20 @@ public class HashTableChained implements Dictionary {
 		int keyIndex = compFunction(key.hashCode());
 
 		if (arrayBucket[keyIndex] == null) {
+			System.out.println("find key hashed to a null index in bucketArray");
 			return null;
 		} else {
 			try {
 				slist = arrayBucket[keyIndex];
 				ListNode node = slist.front();
 				if (((Entry) node.item()).key().equals(key)) {
+					System.out.println("first entry of linked list");
 					return (Entry) node.item();
 				} else {
 					while (node.next() != null) {
 						node = node.next();
 						if (((Entry) node.item()).key().equals(key)) {
+							System.out.println("NOT first entry of linked list");
 							return (Entry) node.item();
 						}
 					}
@@ -192,6 +195,7 @@ public class HashTableChained implements Dictionary {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("end of method key does not exist!");
 		return null;
 	}
 
@@ -230,6 +234,7 @@ public class HashTableChained implements Dictionary {
 
 		int keyIndex = compFunction(key.hashCode());
 		if (arrayBucket[keyIndex] == null) {
+			System.out.println("remove \'key\' hashed to a null index slist!");
 			return null;
 		} else {
 			try {
@@ -239,6 +244,7 @@ public class HashTableChained implements Dictionary {
 					Entry e = (Entry) node.item();
 					node.remove();
 					this.size--;
+					System.out.println("remove first node.item in slist");
 					return e;
 
 				} else {
@@ -248,6 +254,7 @@ public class HashTableChained implements Dictionary {
 							Entry e = (Entry) node.item();
 							node.remove();
 							this.size--;
+							System.out.println("remove NOT first node.item in slist");
 							return e;
 						}
 					}
