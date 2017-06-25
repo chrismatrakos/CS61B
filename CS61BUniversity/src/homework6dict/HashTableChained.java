@@ -348,7 +348,11 @@ public class HashTableChained implements Dictionary {
 	public String toString() {
 		String strMap = "";
 		for (List s : arrayBucket) {
-			strMap += "[" + s.toString() + "]\n";
+			if (s == null) {
+				strMap += "[null]" + "\n";
+			} else {
+				strMap += s.toString() + "\n";
+			}
 		}
 		return strMap;
 	}
