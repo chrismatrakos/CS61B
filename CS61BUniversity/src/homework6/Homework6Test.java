@@ -52,6 +52,54 @@ public class Homework6Test {
 	 **/
 
 	public static void main(String[] args) {
+		// TEST INSERT REMOVE FIND on HASHTABLECHAINED!!!
+		// HashTableChained map = new HashTableChained(10);
+		// map.insert(5, 'a');
+		// map.insert(5, 'b');
+		// map.insert(5, 'c');
+		// map.insert(5, 'd');
+		// map.insert(1, 'a');
+		// map.insert(3, 'b');
+		// map.insert(5, 'g');
+		// map.insert(4, 'c');
+		// map.insert(16, 'c');
+		// map.insert(53, 'c');
+		// map.insert(66, 'd');
+		// map.insert(13, 'f');
+		// map.insert(5, 'f');
+		// map.insert(15, 'f');
+		// map.insert(23, 'f');
+		// map.insert(23, 'f');
+		// map.insert(45, 'f');
+		// map.insert(52, 'f');
+		// System.out.println("size: " + map.size());
+		//
+		// System.out.println(map.remove(15) + "\n" + map.remove(5) + "\n" +
+		// map.remove(100));
+		// map.printCollisions();
+		//
+		// System.out.println(map.find(5));
+		// System.out.println(map.find(23));
+		// System.out.println("size: " + map.size());
+		//
+		// map.remove(1);
+		// map.remove(3);
+		// map.remove(5);
+		// map.remove(4);
+		// map.remove(16);
+		// map.remove(53);
+		// map.remove(66);
+		// map.remove(13);
+		// map.remove(5);
+		// map.remove(15);
+		// map.remove(23);
+		// map.remove(23);
+		// map.remove(45);
+		// map.remove(52);
+		// System.out.println("size: " + map.size());
+		// System.out.println(map.toString());
+		// -------------------------------------------
+		// numBoards tests
 		int numBoards;
 
 		if (args.length == 0) {
@@ -62,6 +110,8 @@ public class Homework6Test {
 		HashTableChained table = new HashTableChained(numBoards);
 		initTable(table, numBoards);
 		System.out.println("Start of the project:");
+
+		table.printCollisions();
 
 		// To test your hash function, add a method to your HashTableChained
 		// class
