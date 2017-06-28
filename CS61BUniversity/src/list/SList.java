@@ -2,6 +2,8 @@
 
 package list;
 
+import java.util.Iterator;
+
 /**
  * A SList is a mutable singly-linked list ADT. Its implementation employs a
  * tail reference.
@@ -9,7 +11,7 @@ package list;
  * DO NOT CHANGE THIS FILE.
  **/
 
-public class SList extends List {
+public class SList extends List implements Iterable {
 
 	/**
 	 * (inherited) size is the number of items in the list. head references the
@@ -149,6 +151,11 @@ public class SList extends List {
 			current = current.next;
 		}
 		return result + "]";
+	}
+
+	@Override
+	public Iterator iterator() {
+		return new SListIterator(this);
 	}
 
 	private static void testInvalidNode(ListNode p) {
