@@ -133,10 +133,12 @@ public class Tree234 extends IntDictionary {
 				} else {
 					if (key > node.key2) {
 						node.key3 = key;
+						node.keys++;
 						return;
 					} else {
 						node.key3 = node.key2;
 						node.key2 = key;
+						node.keys++;
 						return;
 					}
 				}
