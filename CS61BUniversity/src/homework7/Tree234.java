@@ -131,12 +131,7 @@ public class Tree234 extends IntDictionary {
 				if (node.child3 != null) {
 					node = node.child3;
 				} else {
-					if (key < node.key1) {
-						node.key3 = node.key2;
-						node.key2 = node.key1;
-						node.key1 = key;
-						return;
-					} else if (key > node.key2) {
+					if (key > node.key2) {
 						node.key3 = key;
 						return;
 					} else {
