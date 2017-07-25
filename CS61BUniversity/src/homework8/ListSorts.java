@@ -7,6 +7,7 @@ import listhomework8.QueueEmptyException;
 public class ListSorts {
 
 	private final static int SORTSIZE = 1000;
+	public static LinkedQueue queue1 = new LinkedQueue();
 
 	/**
 	 * makeQueueOfQueues() makes a queue of queues, each containing one item of
@@ -124,7 +125,7 @@ public class ListSorts {
 
 	public static void mergeSort(LinkedQueue q) {
 		// Your solution here.
-		if (q.size() <= 1) {
+		if (q.size() == 1) {
 			return;
 		}
 
@@ -140,6 +141,63 @@ public class ListSorts {
 			}
 		}
 		q.append(qq);
+	}
+
+	public static void mergeSort2(LinkedQueue q) {
+		if (q.size() < 2) {
+			return;
+		}
+		int i = 0;
+		LinkedQueue q1 = new LinkedQueue();
+		LinkedQueue q2 = new LinkedQueue();
+		try {
+			while (i < q.size() / 2) {
+				q1.enqueue(q.dequeue());
+				i++;
+			}
+		} catch (QueueEmptyException e) {
+			e.printStackTrace();
+		}
+		try {
+			while (!q.isEmpty()) {
+				q2.enqueue(q.dequeue());
+			}
+		} catch (QueueEmptyException e2) {
+			e2.printStackTrace();
+		}
+
+		mergeSort2(q1);
+		mergeSort2(q2);
+		mergeSortedQueues(q1, q2, q);
+	}
+
+	public static void mergeSortedQueues(LinkedQueue q1, LinkedQueue q2, LinkedQueue q) {
+		// Replace the following line with your solution.
+		if (q1 == null && q2 == null) {
+			System.out.println("EmptyQueue");
+		}
+
+		try {
+			while (!q1.isEmpty() && !q2.isEmpty()) {
+				if (((Comparable) q1.front()).compareTo(q2.front()) < 0) {
+					q.enqueue(q1.dequeue());
+				} else {
+					q.enqueue(q2.dequeue());
+				}
+			}
+			if (q1.isEmpty()) {
+				while (!q2.isEmpty()) {
+					q.enqueue(q2.dequeue());
+				}
+			}
+			if (q2.isEmpty()) {
+				while (!q1.isEmpty()) {
+					q.enqueue(q1.dequeue());
+				}
+			}
+		} catch (QueueEmptyException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -192,6 +250,12 @@ public class ListSorts {
 		System.out.println(q.toString());
 		mergeSort(q);
 		System.out.println(q.toString());
+
+		System.out.println("mergesort using D&C");
+		LinkedQueue q2 = makeRandom(10);
+		System.out.println(q2.toString());
+		mergeSort2(q2);
+		System.out.println(q2.toString());
 		//
 		// q = makeRandom(10);
 		// System.out.println(q.toString());
