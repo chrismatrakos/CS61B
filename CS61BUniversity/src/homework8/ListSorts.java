@@ -168,10 +168,10 @@ public class ListSorts {
 
 		mergeSort2(q1);
 		mergeSort2(q2);
-		mergeSortedQueues(q1, q2, q);
+		mergeSortedQueues2(q1, q2, q);
 	}
 
-	public static void mergeSortedQueues(LinkedQueue q1, LinkedQueue q2, LinkedQueue q) {
+	public static void mergeSortedQueues2(LinkedQueue q1, LinkedQueue q2, LinkedQueue q) {
 		// Replace the following line with your solution.
 		if (q1 == null && q2 == null) {
 			System.out.println("EmptyQueue");
