@@ -128,7 +128,6 @@ public class ListSorts {
 		if (q.size() == 1) {
 			return;
 		}
-
 		LinkedQueue qq = makeQueueOfQueues(q);
 		while (qq.size() > 1) {
 			try {
@@ -136,11 +135,18 @@ public class ListSorts {
 				LinkedQueue q2 = (LinkedQueue) qq.dequeue();
 				LinkedQueue mq = mergeSortedQueues(q1, q2);
 				qq.enqueue(mq);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		q.append(qq);
+
+		try {
+			q.append((LinkedQueue) qq.dequeue());
+		} catch (QueueEmptyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void mergeSort2(LinkedQueue q) {
