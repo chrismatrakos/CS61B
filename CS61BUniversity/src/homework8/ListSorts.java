@@ -318,6 +318,15 @@ public class ListSorts {
 			System.out.println("Quicksort time, " + i * SORTSIZE + " Integers:  " + stopWatch.elapsed() + " msec.");
 		}
 
+		// RESULTS:
+		// Benchmarking:
+		// Mergesort time, 1000 Integers: 6 msec.
+		// Quicksort time, 1000 Integers: 8 msec.
+		// Mergesort time, 10000 Integers: 26 msec.
+		// Quicksort time, 10000 Integers: 24 msec.
+		// Mergesort time, 100000 Integers: 272 msec.
+		// Quicksort time, 100000 Integers: 211 msec.
+		//
 	}
 
 }
