@@ -141,7 +141,7 @@ public class ListSorts {
 
 	public static void mergeSort(LinkedQueue q) {
 		// Your solution here.
-		if (q.size() == 1) {
+		if (q.size() <= 1) {
 			return;
 		}
 		LinkedQueue qq = makeQueueOfQueues(q);
@@ -271,7 +271,7 @@ public class ListSorts {
 	 * @throws QueueEmptyException
 	 **/
 	public static void main(String[] args) {
-		//
+
 		// LinkedQueue qt1 = makeRandom(4);
 		// System.out.println(qt1.toString());
 		// LinkedQueue qt2 = makeRandom(4);
@@ -282,21 +282,20 @@ public class ListSorts {
 		//
 		// LinkedQueue qt3 = makeQueueOfQueues(makeRandom(4));
 		// System.out.println(qt3.toString());
-		//
-		// System.out.println("\nStart existing CS tests:\nMergeSort:");
-		// LinkedQueue q = makeRandom(10);
-		// System.out.println(q.toString());
-		// mergeSort(q);
-		// System.out.println(q.toString());
-		//
-		// System.out.println("mergesort using D&C");
+
+		// System.out.println("MergeSort using Divide & Conquer");
 		// LinkedQueue q2 = makeRandom(10);
 		// System.out.println(q2.toString());
 		// mergeSort2(q2);
 		// System.out.println(q2.toString());
-		//
-		System.out.println("QuickSort:");
 
+		System.out.println("\nStart existing CS tests:\nMergeSort:");
+		LinkedQueue q = makeRandom(10);
+		System.out.println(q.toString());
+		mergeSort(q);
+		System.out.println(q.toString());
+
+		System.out.println("QuickSort:");
 		LinkedQueue qs = makeRandom(10);
 		System.out.println(qs.toString());
 		quickSort(qs);
