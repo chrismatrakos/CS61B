@@ -1,6 +1,8 @@
 /* ListSorts.java */
 package homework8;
 
+import java.util.Random;
+
 import listhomework8.LinkedQueue;
 import listhomework8.QueueEmptyException;
 
@@ -113,6 +115,20 @@ public class ListSorts {
 	public static void partition(LinkedQueue qIn, Comparable pivot, LinkedQueue qSmall, LinkedQueue qEquals,
 			LinkedQueue qLarge) {
 		// Your solution here.
+
+		while (!qIn.isEmpty()) {
+			try {
+				if (pivot.compareTo(qIn.front()) == 0) {
+					qEquals.enqueue(qIn.dequeue());
+				} else if (pivot.compareTo(qIn.front()) > 0) {
+					qSmall.enqueue(qIn.dequeue());
+				} else {
+					qLarge.enqueue(qIn.dequeue());
+				}
+			} catch (QueueEmptyException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -214,6 +230,22 @@ public class ListSorts {
 	 **/
 	public static void quickSort(LinkedQueue q) {
 		// Your solution here.
+		if (q.size() < 2) {
+			return;
+		}
+		int random = new Random().nextInt(q.size() - 1);
+		random += 1;
+		int pivot = (int) q.nth(random);
+
+		LinkedQueue left = new LinkedQueue();
+		LinkedQueue right = new LinkedQueue();
+		LinkedQueue mid = new LinkedQueue();
+		partition(q, pivot, left, mid, right);
+		quickSort(left);
+		quickSort(right);
+		q.append(left);
+		q.append(mid);
+		q.append(right);
 	}
 
 	/**
@@ -239,34 +271,36 @@ public class ListSorts {
 	 * @throws QueueEmptyException
 	 **/
 	public static void main(String[] args) {
-
-		LinkedQueue qt1 = makeRandom(4);
-		System.out.println(qt1.toString());
-		LinkedQueue qt2 = makeRandom(4);
-		System.out.println(qt2.toString());
-		LinkedQueue qt;
-		qt = mergeSortedQueues(qt1, qt2);
-		System.out.println(qt.toString());
-
-		LinkedQueue qt3 = makeQueueOfQueues(makeRandom(4));
-		System.out.println(qt3.toString());
-
-		System.out.println("\nStart existing CS tests:");
-		LinkedQueue q = makeRandom(10);
-		System.out.println(q.toString());
-		mergeSort(q);
-		System.out.println(q.toString());
-
-		System.out.println("mergesort using D&C");
-		LinkedQueue q2 = makeRandom(10);
-		System.out.println(q2.toString());
-		mergeSort2(q2);
-		System.out.println(q2.toString());
 		//
-		// q = makeRandom(10);
+		// LinkedQueue qt1 = makeRandom(4);
+		// System.out.println(qt1.toString());
+		// LinkedQueue qt2 = makeRandom(4);
+		// System.out.println(qt2.toString());
+		// LinkedQueue qt;
+		// qt = mergeSortedQueues(qt1, qt2);
+		// System.out.println(qt.toString());
+		//
+		// LinkedQueue qt3 = makeQueueOfQueues(makeRandom(4));
+		// System.out.println(qt3.toString());
+		//
+		// System.out.println("\nStart existing CS tests:\nMergeSort:");
+		// LinkedQueue q = makeRandom(10);
 		// System.out.println(q.toString());
-		// quickSort(q);
+		// mergeSort(q);
 		// System.out.println(q.toString());
+		//
+		// System.out.println("mergesort using D&C");
+		// LinkedQueue q2 = makeRandom(10);
+		// System.out.println(q2.toString());
+		// mergeSort2(q2);
+		// System.out.println(q2.toString());
+		//
+		System.out.println("QuickSort:");
+
+		LinkedQueue qs = makeRandom(10);
+		System.out.println(qs.toString());
+		quickSort(qs);
+		System.out.println(qs.toString());
 
 		/*
 		 * Remove these comments for Part III. Timer stopWatch = new Timer(); q
