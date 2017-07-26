@@ -301,16 +301,23 @@ public class ListSorts {
 		quickSort(qs);
 		System.out.println(qs.toString());
 
-		/*
-		 * Remove these comments for Part III. Timer stopWatch = new Timer(); q
-		 * = makeRandom(SORTSIZE); stopWatch.start(); mergeSort(q);
-		 * stopWatch.stop(); System.out.println("Mergesort time, " + SORTSIZE +
-		 * " Integers:  " + stopWatch.elapsed() + " msec.");
-		 * 
-		 * stopWatch.reset(); q = makeRandom(SORTSIZE); stopWatch.start();
-		 * quickSort(q); stopWatch.stop(); System.out.println("Quicksort time, "
-		 * + SORTSIZE + " Integers:  " + stopWatch.elapsed() + " msec.");
-		 */
+		System.out.println("\nBenchmarking:");
+		for (int i = 1; i < 1000; i *= 10) {
+			Timer stopWatch = new Timer();
+			q = makeRandom(i * SORTSIZE);
+			stopWatch.start();
+			mergeSort(q);
+			stopWatch.stop();
+			System.out.println("Mergesort time, " + i * SORTSIZE + " Integers:  " + stopWatch.elapsed() + " msec.");
+
+			stopWatch.reset();
+			q = makeRandom(SORTSIZE * i);
+			stopWatch.start();
+			quickSort(q);
+			stopWatch.stop();
+			System.out.println("Quicksort time, " + i * SORTSIZE + " Integers:  " + stopWatch.elapsed() + " msec.");
+		}
+
 	}
 
 }
