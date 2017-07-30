@@ -113,7 +113,7 @@ public class Maze {
 			swap(aw, rand, index);
 		}
 
-		System.out.println(c+" "+aw.length+" "+wallNum);
+		//System.out.println(c+" "+aw.length+" "+wallNum);
 		// fix this method in (i != i)!!!
 		for (i = 0; i <wallNum; i++) {
 			Wall temp = aw[i];
