@@ -110,12 +110,29 @@ public class Sorts {
 				Integer.parseInt("111111e5", 16), Integer.parseInt("61feed0c", 16), Integer.parseInt("3bba7387", 16),
 				Integer.parseInt("52953fdb", 16), Integer.parseInt("40013879", 16) };
 
+		int[] sorts = keys;
 		yell(keys);
 		keys = radixSort(keys);
 		yell(keys);
 		System.out.println("Arrays.sort() method for test:");
-		Arrays.sort(keys);
-		yell(keys);
+
+		checkMethod(keys, sorts);
+
 	}
 
+	public static void checkMethod(int[] keys, int sort[]) {
+		Arrays.sort(sort);
+		boolean test = true;
+		for (int i = 0; i < keys.length; i++) {
+			if (keys[i] != sort[i]) {
+				test = false;
+				break;
+			}
+		}
+		if (!test) {
+			System.out.println("Error arrays not equal");
+		} else {
+			System.out.println("Good Job!!!");
+		}
+	}
 }
